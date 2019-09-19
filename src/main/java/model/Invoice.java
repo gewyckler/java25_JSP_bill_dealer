@@ -37,10 +37,19 @@ public class Invoice implements IBaseEntity {
     private LocalDateTime dateOfRelease;
     private LocalDateTime dateOfPayment;
 
-    @Formula(value = "(SELECT SUM(p.price * p.stock) from product p where p.invoice_id = id as billValue)")
+    @Formula(value = "(SELECT SUM(p.price * p.stock) from product p where p.invoice_id = id)")
     private Double billValue;
 
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
 //    @JoinColumn(name = "invoice_id")
     private List<Product> product;
+
+    public Invoice(String clientName, String clientNip, String clientAddress, boolean ifPaid, LocalDateTime dateOfRelease, LocalDateTime dateOfPayment) {
+        this.clientName = clientName;
+        this.clientNip = clientNip;
+        this.clientAddress = clientAddress;
+        this.ifPaid = ifPaid;
+        this.dateOfRelease = dateOfRelease;
+        this.dateOfPayment = dateOfPayment;
+    }
 }
