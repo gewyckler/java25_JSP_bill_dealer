@@ -15,7 +15,7 @@
     <title>INVOICE ADD</title>
 </head>
 <body>
-<%--<jsp:include page="navigator.jsp"/>--%>
+<jsp:include page="navigator.jsp"/>
 
 </body>
 </html>

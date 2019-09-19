@@ -14,6 +14,7 @@
     <title>INVOICE LIST</title>
 </head>
 <body>
+<jsp:include page="navigator.jsp"/>
 <table style="width: 100%">
     <tr>
         <th>Id.</th>
@@ -44,8 +45,5 @@
         </tr>
     </c:forEach>
 </table>
-<%--<jsp:include page="navigator.jsp"/>--%>
-
-
 </body>
 </html>
