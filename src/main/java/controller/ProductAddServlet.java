@@ -27,21 +27,29 @@ public class ProductAddServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+
         Long invoiceIdToAddProduct = Long.valueOf(req.getParameter("invoiceIdToAddProduct"));
+        req.setAttribute("invoiceId", invoiceIdToAddProduct);
         Optional<Invoice> optionalInvoice = invoiceService.getInvoiceById(invoiceIdToAddProduct);
 
         if (optionalInvoice.isPresent()) {
-            Invoice invoice = optionalInvoice.get();
+            if (optionalInvoice.get().getDateOfRelease() == null && optionalInvoice.get().isIfPaid() == false) {
+                Invoice invoice = optionalInvoice.get();
 
-            String name = req.getParameter("productName");
-            double price = Double.parseDouble(req.getParameter("productPrice"));
-            int stock = Integer.parseInt(req.getParameter("productStock"));
+                String name = req.getParameter("productName");
+                double price = Double.parseDouble(req.getParameter("productPrice"));
+                int stock = Integer.parseInt(req.getParameter("productStock"));
 
-            TaxType taxType = TaxType.valueOf(req.getParameter("taxType"));
+                TaxType taxType = TaxType.valueOf(req.getParameter("taxType"));
 
-            productService.addProduct(invoice, name, price, taxType, stock);
-            resp.setCharacterEncoding("UTF-8");
-            resp.sendRedirect("/invoiceList");
+                productService.addProduct(invoice, name, price, taxType, stock);
+                resp.setCharacterEncoding("UTF-8");
+                resp.sendRedirect("/invoiceList");
+            } else {
+                resp.sendRedirect("/invoiceList");
+            }
+
         }
     }
 }

@@ -17,7 +17,7 @@
 <jsp:include page="navigator.jsp"/>
 <form action="/productAdd" method="post">
 
-    <input type="hidden" name="invoiceIdToAddProduct" value="${requestScope.invoiceId}">
+    <input type="hidden" name="invoiceIdToAddProduct" value="${requestScope.invoiceIdAttribiute}">
     <br/>
     Name: <input type="text" name="productName">
     <br/>

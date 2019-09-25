@@ -18,6 +18,7 @@ public class Product implements IBaseEntity {
     private Long id;
     private String name;
     private double price;
+    private int stock;
 
     @Column(nullable = false)
     @Formula(value = "(case when (taxType='PRODUCT') then (price*0.23) when (taxType='SERVICES') then (price*0.8)end)")
@@ -26,8 +27,6 @@ public class Product implements IBaseEntity {
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private TaxType taxType;
-
-    private int stock;
 
     @ToString.Exclude
     @ManyToOne()
@@ -39,4 +38,10 @@ public class Product implements IBaseEntity {
         this.taxType = taxType;
         this.stock = stock;
     }
+
+//    @Override
+//    public String toString() {
+//        return
+//                id + '|' + name + '|' + '|' + price + '|' + stock + '|' + taxValue + '|' + taxType + '|' + invoice;
+//    }
 }

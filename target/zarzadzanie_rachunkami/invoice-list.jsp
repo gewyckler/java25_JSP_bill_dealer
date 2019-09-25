@@ -41,7 +41,6 @@
             <td>${invoice.getDateOfPayment()}</td>
             <td>${invoice.getBillValue()}</td>
             <td>${invoice.getProduct()}</td>
-
             <td>
                 <table>
                     <tr>
