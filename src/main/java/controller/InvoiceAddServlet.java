@@ -1,6 +1,5 @@
 package controller;
 
-import model.Invoice;
 import services.InvoiceService;
 
 import javax.servlet.ServletException;
@@ -11,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/invoiceAdd")
-public class InvoiceAdd extends HttpServlet {
-    InvoiceService invoiceService = new InvoiceService();
+public class InvoiceAddServlet extends HttpServlet {
+    private final InvoiceService invoiceService = new InvoiceService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/invoide-add").forward(req, resp);
+        req.getRequestDispatcher("/invoice-add.jsp").forward(req, resp);
     }
 
     @Override
@@ -24,11 +23,11 @@ public class InvoiceAdd extends HttpServlet {
         String clientName = req.getParameter("clientName");
         String clientNip = req.getParameter("clientNip");
         String clientAddress = req.getParameter("clientAddress");
-        String paid = req.getParameter("ifPaid");
-        boolean ifPaid = (paid != null && paid.equalsIgnoreCase("on"));
+//        String paid = req.getParameter("ifPaid");
+//        boolean ifPaid = (paid != null && paid.equalsIgnoreCase("on"));
 
-        invoiceService.addInvoice(new Invoice(clientName, clientNip, clientAddress, ifPaid, null, null));
+        invoiceService.addInvoice(clientName, clientNip, clientAddress);
         resp.setCharacterEncoding("UTF-8");
-        resp.sendRedirect("/invoice-list");
+        resp.sendRedirect("/invoiceList");
     }
 }

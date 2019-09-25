@@ -10,11 +10,12 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <title>INVOICE LIST</title>
 </head>
 <body>
 <jsp:include page="navigator.jsp"/>
+
 <table style="width: 100%">
     <tr>
         <th>Id.</th>
@@ -28,20 +29,34 @@
         <th>Bill Value</th>
         <th>List of Product</th>
     </tr>
-
-
     <c:forEach var="invoice" items="${requestScope.invoiceList}">
         <tr>
-            <td>${invoice.getID()}</td>
+            <td>${invoice.getId()}</td>
             <td>${invoice.getDateOfCreation()}</td>
             <td>${invoice.getClientName()}</td>
             <td>${invoice.getClientNip()}</td>
             <td>${invoice.getClientAddress()}</td>
-            <td>${invoice.getIfPaid()}</td>
+            <td>${invoice.isIfPaid()}</td>
             <td>${invoice.getDateOfRelease()}</td>
             <td>${invoice.getDateOfPayment()}</td>
             <td>${invoice.getBillValue()}</td>
             <td>${invoice.getProduct()}</td>
+
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <a href="/productAdd?invoiceId=${invoice.getId()}">Add Product</a>
+                        </td>
+                        <td>
+                            <a href="/invoiceDelete?invoiceId=${invoice.getId()}">Delete Invoice</a>
+                        </td>
+                        <td>
+                                <%--<a href="/product-add?invoiceId=${invoice.getId()}">Edit Invoice NW</a>--%>
+                        </td>
+                    </tr>
+                </table>
+            </td>
         </tr>
     </c:forEach>
 </table>

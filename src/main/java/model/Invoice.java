@@ -3,6 +3,7 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
 
@@ -33,23 +34,21 @@ public class Invoice implements IBaseEntity {
     private String clientAddress;
 
     @Column(nullable = false, columnDefinition = " tinyint default 0")
-    private boolean ifPaid;
+    private boolean ifPaid = false;
     private LocalDateTime dateOfRelease;
     private LocalDateTime dateOfPayment;
 
     @Formula(value = "(SELECT SUM(p.price * p.stock) from product p where p.invoice_id = id)")
     private Double billValue;
 
-    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @Cascade(value = {org.hibernate.annotations.CascadeType.REMOVE})
 //    @JoinColumn(name = "invoice_id")
     private List<Product> product;
 
-    public Invoice(String clientName, String clientNip, String clientAddress, boolean ifPaid, LocalDateTime dateOfRelease, LocalDateTime dateOfPayment) {
+    public Invoice(String clientName, String clientNip, String clientAddress) {
         this.clientName = clientName;
         this.clientNip = clientNip;
         this.clientAddress = clientAddress;
-        this.ifPaid = ifPaid;
-        this.dateOfRelease = dateOfRelease;
-        this.dateOfPayment = dateOfPayment;
     }
 }

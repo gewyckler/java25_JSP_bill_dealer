@@ -17,5 +17,16 @@
 <body>
 <jsp:include page="navigator.jsp"/>
 
+<form action="/invoiceAdd" method="post">
+    <br/>
+    Client Name: <input type="text" name="clientName" value="${requestScope.invoiceClientName}">
+    <br/>
+    Client Nip: <input type="text" name="clientNip" value="${requestScope.invoiceClientNip}" maxlength="10"
+                       minlength="10">
+    <br/>
+    Client Address: <input type="text" name="clientAddress" value="${requestScope.invoiceClientAddress}">
+    <br/>
+    Dodaj: <input type="submit">
+</form>
 </body>
 </html>

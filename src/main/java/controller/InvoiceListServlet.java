@@ -12,12 +12,12 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/invoiceList")
-public class InvoiceList extends HttpServlet {
-    private static final InvoiceService invoiceService = new InvoiceService();
+public class InvoiceListServlet extends HttpServlet {
+    private final InvoiceService invoiceService = new InvoiceService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Invoice> invoiceList = invoiceService.finAll();
+        List<Invoice> invoiceList = invoiceService.findAll();
         req.setAttribute("invoiceList", invoiceList);
 
         req.getRequestDispatcher("/invoice-list.jsp").forward(req, resp);

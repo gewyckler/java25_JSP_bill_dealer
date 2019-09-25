@@ -4,8 +4,10 @@
 
 </head>
 <body>
-<jsp:include page="navigator.jsp"/>
+<div id="starterText">
+    Welcome to Invoite Menagment Application
 
-<h2>Hello World!</h2>
+</div>
+<jsp:include page="navigator.jsp"/>
 </body>
 </html>

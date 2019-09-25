@@ -20,7 +20,7 @@ public class Product implements IBaseEntity {
     private double price;
 
     @Column(nullable = false)
-    @Formula(value = "(case when (taxType='PRODUCT') then (price*0.23) when (taxType='SERVICES') then price*0.8)end)")
+    @Formula(value = "(case when (taxType='PRODUCT') then (price*0.23) when (taxType='SERVICES') then (price*0.8)end)")
     private double taxValue;
 
     @Column(nullable = false)
@@ -32,4 +32,11 @@ public class Product implements IBaseEntity {
     @ToString.Exclude
     @ManyToOne()
     private Invoice invoice;
+
+    public Product(String name, double price, TaxType taxType, int stock) {
+        this.name = name;
+        this.price = price;
+        this.taxType = taxType;
+        this.stock = stock;
+    }
 }
