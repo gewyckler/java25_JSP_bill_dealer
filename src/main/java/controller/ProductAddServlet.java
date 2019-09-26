@@ -20,8 +20,9 @@ public class ProductAddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long invoiceId = Long.valueOf(req.getParameter("invoiceId"));
-        req.setAttribute("invoiceIdAttribiute", invoiceId);
+        req.setCharacterEncoding("UTF-8");
+        Long invoiceIdToAdd = (Long) req.getAttribute("invoiceId");
+        req.setAttribute("invoiceIdAttribiute", invoiceIdToAdd);
         req.getRequestDispatcher("/product-add.jsp").forward(req, resp);
     }
 
@@ -29,12 +30,13 @@ public class ProductAddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        Long invoiceIdToAddProduct = Long.valueOf(req.getParameter("invoiceIdToAddProduct"));
+        Long invoiceIdToAddProduct = (Long) req.getAttribute("invoiceIdToAddProduct");
         req.setAttribute("invoiceId", invoiceIdToAddProduct);
+
         Optional<Invoice> optionalInvoice = invoiceService.getInvoiceById(invoiceIdToAddProduct);
 
         if (optionalInvoice.isPresent()) {
-            if (optionalInvoice.get().getDateOfRelease() == null && optionalInvoice.get().isIfPaid() == false) {
+            if (optionalInvoice.get().getDateOfRelease() == null || optionalInvoice.get().isIfPaid() == false) {
                 Invoice invoice = optionalInvoice.get();
 
                 String name = req.getParameter("productName");
@@ -45,9 +47,9 @@ public class ProductAddServlet extends HttpServlet {
 
                 productService.addProduct(invoice, name, price, taxType, stock);
                 resp.setCharacterEncoding("UTF-8");
-                resp.sendRedirect("/invoiceList");
+                resp.sendRedirect("/productList");
             } else {
-                resp.sendRedirect("/invoiceList");
+                resp.sendRedirect("/productList");
             }
 
         }

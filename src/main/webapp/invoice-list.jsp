@@ -40,19 +40,20 @@
             <td>${invoice.getDateOfRelease()}</td>
             <td>${invoice.getDateOfPayment()}</td>
             <td>${invoice.getBillValue()}</td>
-            <td>${invoice.getProduct()}</td>
+            <td>${invoice.getProduct()  }</td>
             <td>
                 <table>
                     <tr>
+
                         <td>
-                            <a href="/productAdd?invoiceId=${invoice.getId()}">Add Product</a>
+                            <a href="/productList?invoiceId=${invoice.getId()}">Products</a>
                         </td>
                         <td>
                             <a href="/invoiceDelete?invoiceId=${invoice.getId()}">Delete Invoice</a>
                         </td>
-                        <td>
-                                <%--<a href="/product-add?invoiceId=${invoice.getId()}">Edit Invoice NW</a>--%>
-                        </td>
+                        <c:if test="${invoice.dateOfRelease == null || invoice.dateOfPayment == null}">
+
+                        </c:if>
                     </tr>
                 </table>
             </td>
