@@ -44,7 +44,6 @@
             <td>
                 <table>
                     <tr>
-
                         <td>
                             <a href="/productList?invoiceId=${invoice.getId()}">Products</a>
                         </td>
@@ -53,15 +52,17 @@
                         </td>
                         <c:if test="${invoice.dateOfRelease == null}">
                             <td>
-                                <a href="/invoiceMarkAsReleased?invoiceId=${invoice.getId()}">Mark as Released</a>
+                                <a href="/invoiceMarkAsReleased?invoiceId=${invoice.getId()}">Set Released</a>
+                            </td>
+                            <td>
+                                <a href="/invoiceEdit?invoiceId=${invoice.getId()}">Edit</a>
                             </td>
                         </c:if>
                         <c:if test="${invoice.dateOfPayment == null && invoice.ifPaid == false}">
                             <td>
-                                <a href="/invoiceMarkAsPaid?invoiceId=${invoice.getId()}">Mark as Paid</a>
+                                <a href="/invoiceMarkAsPaid?invoiceId=${invoice.getId()}">Set Paid</a>
                             </td>
                         </c:if>
-
                     </tr>
                 </table>
             </td>

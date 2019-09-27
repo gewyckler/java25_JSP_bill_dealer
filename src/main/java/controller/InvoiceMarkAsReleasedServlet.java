@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet("/invoiceMarkAsPaid")
-public class InvoiceMarkAsPaid extends HttpServlet {
+@WebServlet("/invoiceMarkAsReleased")
+public class InvoiceMarkAsReleasedServlet extends HttpServlet {
     private final InvoiceService invoiceService = new InvoiceService();
 
     @Override
@@ -20,7 +20,7 @@ public class InvoiceMarkAsPaid extends HttpServlet {
         Long invoiceId = Long.valueOf(req.getParameter("invoiceId"));
         Optional<Invoice> optionalInvoice = invoiceService.getInvoiceById(invoiceId);
         if (optionalInvoice.isPresent()) {
-            invoiceService.markAsPaid(optionalInvoice.get());
+            invoiceService.markAsReleased(optionalInvoice.get());
             resp.sendRedirect("/invoiceList");
         }
     }

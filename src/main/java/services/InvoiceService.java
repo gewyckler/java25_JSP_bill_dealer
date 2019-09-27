@@ -46,4 +46,8 @@ public class InvoiceService {
         invoice.setDateOfRelease(LocalDateTime.now());
         entityDao.saveOrUpdate(invoice);
     }
+
+    public void update(Invoice invoice) {
+        entityDao.saveOrUpdate(invoice);
+    }
 }

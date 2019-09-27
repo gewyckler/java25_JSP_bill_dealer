@@ -20,7 +20,7 @@
 <c:set var="invoiceObj" scope="page" value="${requestScope.invoiceObj}"/>
 <c:set var="invoiceId" scope="request" value="${requestScope.invoiceId}"/>
 
-<c:if test="${invoiceObj.dateOfRelease == null || (invoiceObj.dateOfPayment == null && invoiceObj.ifPaid == false)}">
+<c:if test="${invoiceObj.dateOfRelease == null && (invoiceObj.dateOfPayment == null || invoiceObj.ifPaid == false)}">
     <a href="/productAdd?invoiceId=${invoiceObj.getId()}"> + Add Product</a>
 </c:if>
 
@@ -44,7 +44,7 @@
             <td>${product.getTaxType()}</td>
             <td>${invoiceObj.getId()}</td>
             <td>
-                <c:if test="${invoiceObj.dateOfRelease == null || (invoiceObj.dateOfPayment == null && invoiceObj.ifPaid == false)}">
+                <c:if test="${invoiceObj.dateOfRelease == null && (invoiceObj.dateOfPayment == null || invoiceObj.ifPaid == false)}">
                     <table>
                         <tr>
                             <td>

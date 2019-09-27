@@ -17,7 +17,9 @@
 <body>
 <jsp:include page="navigator.jsp"/>
 
-<form action="/invoiceAdd" method="post">
+<form action="${requestScope.invoiceId == null ? '/invoiceAdd' : '/invoiceEdit'}" method="post">
+    <input type="hidden" name="invoiceId" value="${requestScope.invoiceId}">
+    <input type="hidden" name="dateOfCreation" value="${requestScope.dateOfCreation}">
     <br/>
     Client Name: <input type="text" name="clientName" value="${requestScope.invoiceClientName}">
     <br/>
