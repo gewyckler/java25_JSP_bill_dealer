@@ -29,4 +29,12 @@ public class ProductService {
         Optional<Product> optionalProduct = entityDao.getById(Product.class, productIdToRemove);
         return optionalProduct.get().getInvoice().getId();
     }
+
+    public Optional<Product> getProductById(Long productId) {
+        return entityDao.getById(Product.class, productId);
+    }
+
+    public void updateProduct(Product product) {
+        entityDao.saveOrUpdate(product);
+    }
 }

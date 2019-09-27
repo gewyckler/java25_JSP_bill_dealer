@@ -23,7 +23,7 @@ public class ProductAddServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         Long invoiceIdToAdd = Long.valueOf(req.getParameter("invoiceId"));
 
-        req.setAttribute("invoiceIdAttribiute", invoiceIdToAdd);
+        req.setAttribute("invoiceId", invoiceIdToAdd);
         req.getRequestDispatcher("/product-add.jsp").forward(req, resp);
     }
 

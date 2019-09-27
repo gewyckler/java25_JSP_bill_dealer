@@ -42,7 +42,7 @@
             <td>${product.getStock()}</td>
             <td>${product.getTaxValue()}</td>
             <td>${product.getTaxType()}</td>
-            <td>${invoiceObj.getId()    }</td>
+            <td>${invoiceObj.getId()}</td>
             <td>
                 <c:if test="${invoiceObj.dateOfRelease == null || (invoiceObj.dateOfPayment == null && invoiceObj.ifPaid == false)}">
                     <table>

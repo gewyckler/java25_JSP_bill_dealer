@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet("/productDelete")
 public class ProductDeleteServlet extends HttpServlet {
-    ProductService productService = new ProductService();
+    private final ProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
