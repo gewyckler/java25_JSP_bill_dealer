@@ -21,18 +21,17 @@ public class ProductAddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        Long invoiceIdToAdd = (Long) req.getAttribute("invoiceId");
+        Long invoiceIdToAdd = Long.valueOf(req.getParameter("invoiceId"));
+
         req.setAttribute("invoiceIdAttribiute", invoiceIdToAdd);
         req.getRequestDispatcher("/product-add.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
 
-        Long invoiceIdToAddProduct = (Long) req.getAttribute("invoiceIdToAddProduct");
-        req.setAttribute("invoiceId", invoiceIdToAddProduct);
-
+        Long invoiceIdToAddProduct = Long.valueOf(req.getParameter("invoiceIdToAddProduct"));
         Optional<Invoice> optionalInvoice = invoiceService.getInvoiceById(invoiceIdToAddProduct);
 
         if (optionalInvoice.isPresent()) {
@@ -47,9 +46,9 @@ public class ProductAddServlet extends HttpServlet {
 
                 productService.addProduct(invoice, name, price, taxType, stock);
                 resp.setCharacterEncoding("UTF-8");
-                resp.sendRedirect("/productList");
+                resp.sendRedirect("/productList?invoiceId=" + invoiceIdToAddProduct);
             } else {
-                resp.sendRedirect("/productList");
+
             }
 
         }

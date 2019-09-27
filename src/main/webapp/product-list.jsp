@@ -17,9 +17,13 @@
 <body>
 <jsp:include page="navigator.jsp"/>
 
-<c:set var="invoiceObj" scope="session" value="${requestScope.invoiceObj}"/>
+<c:set var="invoiceObj" scope="page" value="${requestScope.invoiceObj}"/>
+<c:set var="invoiceId" scope="request" value="${requestScope.invoiceId}"/>
 
-<a href="/productAdd?invoiceId=${invoiceObj.getId()}"> + Add Product</a>
+<c:if test="${invoiceObj.dateOfRelease == null || (invoiceObj.dateOfPayment == null && invoiceObj.ifPaid == false)}">
+    <a href="/productAdd?invoiceId=${invoiceObj.getId()}"> + Add Product</a>
+</c:if>
+
 <table width="100%">
     <tr>
         <th>Id.</th>
@@ -31,7 +35,6 @@
     </tr>
     <c:forEach var="product" items="${requestScope.productList}">
 
-
         <tr>
             <td>${product.getId()}</td>
             <td>${product.getName()}</td>
@@ -39,13 +42,16 @@
             <td>${product.getStock()}</td>
             <td>${product.getTaxValue()}</td>
             <td>${product.getTaxType()}</td>
-            <td>${invoiceObj.getId()}</td>
+            <td>${invoiceObj.getId()    }</td>
             <td>
-                <c:if test="${invoiceObj.dateOfRelease == null || invoiceObj.dateOfPayment == null}">
+                <c:if test="${invoiceObj.dateOfRelease == null || (invoiceObj.dateOfPayment == null && invoiceObj.ifPaid == false)}">
                     <table>
                         <tr>
                             <td>
-                                <a href="/productDelete?productId=${invoiceObj.getId()}">Delete</a>
+                                <a href="/productDelete?productId=${product.getId()}">Delete</a>
+                            </td>
+                            <td>
+                                <a href="/productEdit?productId=${product.getId()}">Edit</a>
                             </td>
                         </tr>
                     </table>
@@ -54,7 +60,6 @@
         </tr>
     </c:forEach>
 </table>
-
 
 </body>
 </html>

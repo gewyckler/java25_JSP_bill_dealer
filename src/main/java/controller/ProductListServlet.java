@@ -23,14 +23,21 @@ public class ProductListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
 
-        List<Product> productList = productService.findAll();
+        //Pobranie parametru który jest przesyłany przez URL po kliknięciu productList w invoice-list.jsp
         Long invoiceId = Long.valueOf(req.getParameter("invoiceId"));
-        req.setAttribute("productList", productList);
         Optional<Invoice> optionalInvoice = invoiceService.getInvoiceById(invoiceId);
         if (optionalInvoice.isPresent()) {
-            req.setAttribute("invoiceObj", optionalInvoice.get());
-        }
 
-        req.getRequestDispatcher("/product-list.jsp").forward(req, resp);
+            //Pobranie listy produktów żeby można była je wyświetlić w product-list.jsp
+            List<Product> productList = optionalInvoice.get().getProduct();
+            req.setAttribute("productList", productList);
+
+            req.setAttribute("invoiceId", invoiceId);
+
+            // Pobieranie obiektu z optional dla wyrażeń warunowych w product-list.jsp
+            req.setAttribute("invoiceObj", optionalInvoice.get());
+
+            req.getRequestDispatcher("/product-list.jsp").forward(req, resp);
+        }
     }
 }

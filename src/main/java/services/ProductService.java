@@ -6,6 +6,7 @@ import model.Product;
 import model.TaxType;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductService {
     private EntityDao entityDao = new EntityDao();
@@ -22,5 +23,10 @@ public class ProductService {
 
     public List<Product> findAll() {
         return entityDao.getAll(Product.class);
+    }
+
+    public Long getInvoiceIdFromProduct(Long productIdToRemove) {
+        Optional<Product> optionalProduct = entityDao.getById(Product.class, productIdToRemove);
+        return optionalProduct.get().getInvoice().getId();
     }
 }

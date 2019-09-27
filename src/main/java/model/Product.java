@@ -16,12 +16,13 @@ public class Product implements IBaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
     private double price;
     private int stock;
 
     @Column(nullable = false)
-    @Formula(value = "(case when (taxType='PRODUCT') then (price*0.23) when (taxType='SERVICES') then (price*0.8)end)")
+    @Formula(value = "(case when (taxType='PRODUCT') then (price*0.23) when (taxType='SERVICES') then (price*0.8)end )")
     private double taxValue;
 
     @Column(nullable = false)

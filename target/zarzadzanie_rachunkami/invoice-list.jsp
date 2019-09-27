@@ -27,7 +27,7 @@
         <th>Date of Release</th>
         <th>Date of Payment</th>
         <th>Bill Value</th>
-        <th>List of Product</th>
+        <th>Amount of Product</th>
     </tr>
     <c:forEach var="invoice" items="${requestScope.invoiceList}">
         <tr>
@@ -40,7 +40,7 @@
             <td>${invoice.getDateOfRelease()}</td>
             <td>${invoice.getDateOfPayment()}</td>
             <td>${invoice.getBillValue()}</td>
-            <td>${invoice.getProduct()  }</td>
+            <td>${invoice.getAmountOfProduct()}</td>
             <td>
                 <table>
                     <tr>
@@ -51,9 +51,17 @@
                         <td>
                             <a href="/invoiceDelete?invoiceId=${invoice.getId()}">Delete Invoice</a>
                         </td>
-                        <c:if test="${invoice.dateOfRelease == null || invoice.dateOfPayment == null}">
-
+                        <c:if test="${invoice.dateOfRelease == null}">
+                            <td>
+                                <a href="/invoiceMarkAsReleased?invoiceId=${invoice.getId()}">Mark as Released</a>
+                            </td>
                         </c:if>
+                        <c:if test="${invoice.dateOfPayment == null && invoice.ifPaid == false}">
+                            <td>
+                                <a href="/invoiceMarkAsPaid?invoiceId=${invoice.getId()}">Mark as Paid</a>
+                            </td>
+                        </c:if>
+
                     </tr>
                 </table>
             </td>

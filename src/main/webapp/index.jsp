@@ -5,7 +5,7 @@
 </head>
 <body>
 <div id="starterText">
-    Welcome to Invoite Menagment Application
+    Welcome to Invoice Menagment Application
 
 </div>
 <jsp:include page="navigator.jsp"/>
