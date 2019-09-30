@@ -41,7 +41,7 @@ public class Invoice implements IBaseEntity {
     @Formula(value = "(SELECT SUM(p.price * p.stock) from product p where p.invoice_id = id)")
     private Double billValue;
 
-//    @Formula(value = "(SELECT COUNT(*) from product p where p.invoice_id = id")
+    @Formula(value = "(SELECT COUNT(*) from product p where p.invoice_id = id)")
     private int amountOfProduct;
 
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
