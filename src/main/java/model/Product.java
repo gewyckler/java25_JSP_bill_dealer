@@ -39,10 +39,4 @@ public class Product implements IBaseEntity {
         this.taxType = taxType;
         this.stock = stock;
     }
-
-//    @Override
-//    public String toString() {
-//        return
-//                id + '|' + name + '|' + '|' + price + '|' + stock + '|' + taxValue + '|' + taxType + '|' + invoice;
-//    }
 }

@@ -35,6 +35,7 @@ public class Invoice implements IBaseEntity {
 
     @Column(nullable = false, columnDefinition = " tinyint default 0")
     private boolean ifPaid = false;
+
     private LocalDateTime dateOfRelease;
     private LocalDateTime dateOfPayment;
 
@@ -44,9 +45,9 @@ public class Invoice implements IBaseEntity {
     @Formula(value = "(SELECT COUNT(*) from product p where p.invoice_id = id)")
     private int amountOfProduct;
 
+    // @JoinColumn(name = "product.invoice_id")
     @OneToMany(mappedBy = "invoice", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @Cascade(value = {org.hibernate.annotations.CascadeType.REMOVE})
-//    @JoinColumn(name = "invoice_id")
     private List<Product> product;
 
     public Invoice(String clientName, String clientNip, String clientAddress) {
